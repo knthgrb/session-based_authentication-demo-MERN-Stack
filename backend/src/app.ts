@@ -1,12 +1,20 @@
 import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
+import cors from "cors";
 import userRoutes from "./routes/user.route";
 import session from "express-session";
 import env from "./utils/validateEnv";
 import MongoStore from "connect-mongo";
+import { isHttpError } from "http-errors";
 
 const app = express();
 
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:5173",
+  })
+);
 app.use(express.json());
 
 app.use(
@@ -34,8 +42,11 @@ app.use((req, res, next) => {
 // ERROR HANDLER
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
   let errorMessage = "An unknown error occured";
-  if (error instanceof Error) errorMessage = error.message;
-  res.status(500).json({ error: errorMessage });
+  let statusCode = 500;
+  if (isHttpError(error)) {
+    (statusCode = error.status), (errorMessage = error.message);
+  }
+  res.status(statusCode).json({ error: errorMessage });
 });
 
 export default app;

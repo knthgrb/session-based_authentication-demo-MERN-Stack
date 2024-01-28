@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+  @apply h-8 w-full rounded-md border border-slate-300 px-2 py-5;
+}
+
+input:focus {
+  @apply outline-blue-500;
+}
