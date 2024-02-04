@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
     }
   };
 
-  // REDIRECT IF THERE IS USER
+  // REDIRECT IF THERE IS NO USER
   useEffect(() => {
     if (!user) {
       navigate("/login");
