@@ -5,16 +5,10 @@ import bcrypt from "bcrypt";
 
 // GET AUTHENTICATED USER
 export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
-  const authenticatedUserId = req.session.userId;
+  const { userId } = req.session;
 
   try {
-    if (!authenticatedUserId) {
-      throw createHttpError(401, "User not authenticated.");
-    }
-
-    const user = await UserModel.findById(authenticatedUserId)
-      .select("+email")
-      .exec();
+    const user = await UserModel.findById(userId).select("+email").exec();
 
     res.status(200).json(user);
   } catch (error) {
@@ -35,13 +29,12 @@ export const signUp: RequestHandler<
   signUpBody,
   unknown
 > = async (req, res, next) => {
-  const username = req.body.username;
-  const email = req.body.email;
+  const { username, email } = req.body;
   const passwordRaw = req.body.password;
 
   try {
     if (!username || !email || !passwordRaw) {
-      throw createHttpError(400, "Parameters missing.");
+      throw createHttpError(400, "Parameters missing");
     }
 
     const existingUsername = await UserModel.findOne({
@@ -66,8 +59,6 @@ export const signUp: RequestHandler<
       password: passwordHashed,
     });
 
-    req.session.userId = newUser._id;
-
     res.status(201).json(newUser);
   } catch (error) {
     next(error);
@@ -86,8 +77,7 @@ export const logIn: RequestHandler<
   logInBody,
   unknown
 > = async (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
+  const { username, password } = req.body;
 
   try {
     if (!username || !password) {

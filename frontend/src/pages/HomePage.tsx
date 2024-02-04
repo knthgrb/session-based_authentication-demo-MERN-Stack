@@ -6,11 +6,13 @@ import { useNavigate } from "react-router-dom";
 
 const HomePage: React.FC = () => {
   const { user } = useDataLayer();
+
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      if (user) await UserApi.logOut();
+      await UserApi.logOut();
+      window.location.reload();
     } catch (error) {
       if (isAxiosError(error)) {
         const axiosError = error as AxiosError<UserApi.ErrorResponse>;
@@ -19,11 +21,21 @@ const HomePage: React.FC = () => {
     }
   };
 
+  // REDIRECT IF THERE IS USER
   useEffect(() => {
     if (!user) {
       navigate("/login");
     }
   }, [user, navigate]);
+
+  // if (loading) {
+  //   return (
+  //     <div className="flex min-h-screen items-center justify-center">
+  //       Loading...
+  //     </div>
+  //   );
+  // }
+
   return (
     <>
       <div>

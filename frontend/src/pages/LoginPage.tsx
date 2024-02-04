@@ -42,6 +42,8 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     if (user) {
       navigate("/home");
+    } else {
+      navigate("/login");
     }
   }, [user, navigate]);
 
@@ -53,6 +55,7 @@ const LoginPage: React.FC = () => {
         </h1>
         <form className="flex w-[24rem] flex-col gap-4" onSubmit={handleSubmit}>
           <input
+            name="username"
             type="text"
             required
             placeholder="email"
@@ -63,6 +66,7 @@ const LoginPage: React.FC = () => {
             }}
           />
           <input
+            name="password"
             type="password"
             required
             placeholder="password"

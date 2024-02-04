@@ -43,6 +43,7 @@ const RegisterPage: React.FC = () => {
         </h1>
         <form className="flex w-[24rem] flex-col gap-4" onSubmit={handleSubmit}>
           <input
+            name="username"
             type="text"
             required
             placeholder="username"
@@ -57,6 +58,7 @@ const RegisterPage: React.FC = () => {
             errorMessage.toLowerCase().includes("username") &&
             renderErrorMessage(errorMessage)}
           <input
+            name="email"
             type="email"
             required
             placeholder="email"
@@ -71,6 +73,7 @@ const RegisterPage: React.FC = () => {
             errorMessage.toLowerCase().includes("email") &&
             renderErrorMessage(errorMessage)}
           <input
+            name="password"
             type="password"
             required
             placeholder="password"

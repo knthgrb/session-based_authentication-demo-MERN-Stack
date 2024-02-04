@@ -1,9 +1,9 @@
 {
   "name": "authentication-demo",
   "private": true,
-  "proxy": "http://localhost:5000",
   "version": "0.0.0",
   "type": "module",
+  "proxy": "http://localhost:5000",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

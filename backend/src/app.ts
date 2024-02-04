@@ -11,17 +11,19 @@ const app = express();
 
 app.use(
   cors({
-    credentials: true,
     origin: "http://localhost:5173",
+    credentials: true,
   })
 );
+
 app.use(express.json());
 
 app.use(
   session({
+    name: "sid",
     secret: env.SESSION_SECRET,
-    resave: false,
     saveUninitialized: false,
+    resave: false,
     cookie: {
       maxAge: 60 * 60 * 1000,
     },
