@@ -42,9 +42,7 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     if (user) {
       navigate("/home");
-    } else {
-      navigate("/login");
-    }
+    } 
   }, [user, navigate]);
 
   return (
