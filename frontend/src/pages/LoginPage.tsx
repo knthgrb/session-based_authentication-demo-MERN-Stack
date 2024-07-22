@@ -42,7 +42,7 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     if (user) {
       navigate("/home");
-    } 
+    }
   }, [user, navigate]);
 
   return (
@@ -56,7 +56,7 @@ const LoginPage: React.FC = () => {
             name="username"
             type="text"
             required
-            placeholder="email"
+            placeholder="username"
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);

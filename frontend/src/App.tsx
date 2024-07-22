@@ -4,7 +4,7 @@ import AppRoutes from "./Routes";
 import * as UserApi from "./services/authentication";
 import { useDataLayer } from "./store/useDataLayer";
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "http://localhost:5001";
 axios.defaults.withCredentials = true;
 
 const App: React.FC = () => {

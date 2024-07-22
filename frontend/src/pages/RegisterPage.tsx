@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as UserApi from "../services/authentication";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AxiosError, isAxiosError } from "axios";
 
 const RegisterPage: React.FC = () => {
@@ -8,6 +8,8 @@ const RegisterPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string | undefined>("");
+
+  const navigate = useNavigate();
 
   // FUNCTION COMPONENT TO RENDER THE ERROR MESSAGE
   const renderErrorMessage = (message: string) => {
@@ -18,7 +20,8 @@ const RegisterPage: React.FC = () => {
   const register = async (credentials: UserApi.SignUpCredentials) => {
     try {
       await UserApi.signUp(credentials);
-      window.location.reload();
+      alert("Account created successfully");
+      navigate("/login");
     } catch (error) {
       if (isAxiosError(error)) {
         const axiosError = error as AxiosError<UserApi.ErrorResponse>;
