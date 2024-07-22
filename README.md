@@ -11,6 +11,8 @@ cd session-based_authentication-demo-MERN-Stack
 
 ## Running the Application
 
+**(SUBJECT TO CHANGE DUE TO DOCKERIZATION)**
+
 **Frontend**
 
 1. Navigate to the `frontend/` directory.
